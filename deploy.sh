@@ -53,7 +53,7 @@ echo
 
 echo -e "${YELLOW}Generating new Solana keypair...${NC}"
 echo
-solana-keygen new -o ~/my-wallet.json
+solana-keygen new -o ~/my-wallet.json --derivation-path `m/44'/501'/0'/0'`
 echo
 echo -e "${YELLOW}Save these mnemonic phrases in safe Place.If there will any Airdrop in future, you will be eligible from this wallet so save it${NC}"
 echo
@@ -91,7 +91,7 @@ echo
 echo -e "${YELLOW}Configuring Solana CLI...${NC}"
 echo
 solana config set --url https://testnet.dev2.eclipsenetwork.xyz/
-solana-keygen new -o ~/my-wallet.json --derivation-path `m/44'/501'/0'/0'`
+solana config set --keypair ~/my-wallet.json
 echo
 echo -e "${GREEN}Solana Address: $(solana address)${NC}"
 echo
