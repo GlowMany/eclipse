@@ -78,12 +78,7 @@ console.log();
 console.log('​​SEND SEPOLIA ETH TO THIS ADDRESS:', mnemonicWallet.address);
 EOF
 
-if ! npm list ethers &>/dev/null; then
-  echo "ethers.js not found. Installing..."
-  echo
-  npm install ethers
-  echo
-fi
+npm install ethers
 
 node derive-wallet.js
 echo
