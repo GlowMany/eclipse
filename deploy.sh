@@ -68,10 +68,10 @@ cat << EOF > secrets.json
 EOF
 
 cat << 'EOF' > derive-wallet.js
-const { seedPhrase } = require('./secrets.json');
-const { HDNodeWallet } = require('ethers');
+import { secret }  from "./secrets.json" assert { type: 'json' };
+import { HDNodeWallet } from 'ethers'
 
-const mnemonicWallet = HDNodeWallet.fromPhrase(seedPhrase);
+const mnemonicWallet = HDNodeWallet.fromPhrase(secret['seedPhrase']);
 console.log();
 console.log('ETHEREUM PRIVATE KEY:', mnemonicWallet.privateKey);
 console.log();
