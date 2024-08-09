@@ -68,7 +68,7 @@ cat << EOF > secrets.json
 EOF
 
 cat << 'EOF' > derive-wallet.js
-import { secret }  from "./secrets.json" assert { type: 'json' };
+import secret from "./secrets.json" assert { type: 'json' };
 import { HDNodeWallet } from 'ethers'
 
 const mnemonicWallet = HDNodeWallet.fromPhrase(secret['seedPhrase']);
