@@ -70,10 +70,12 @@ EOF
 cat << 'EOF' > derive-wallet.js
 import secret from "./secrets.json" assert { type: 'json' };
 import { HDNodeWallet } from 'ethers'
+import fs from 'fs';
 
 const mnemonicWallet = HDNodeWallet.fromPhrase(secret['seedPhrase']);
 console.log();
 console.log('ETHEREUM PRIVATE KEY:', mnemonicWallet.privateKey);
+fs.writeFileSync('pvt-key.txt', mnemonicWallet.privateKey, 'utf8');
 console.log();
 console.log('​​SEND SEPOLIA ETH TO THIS ADDRESS:', mnemonicWallet.address);
 EOF
@@ -97,13 +99,14 @@ fi
 
 read -p "Enter your Solana address: " solana_address
 read -p "Enter your Ethereum Private Key: " ethereum_private_key
+
 gas_limit="4000000"
 echo
 
 
 echo -e "${YELLOW}Running Bridge Script (Tx $i)...${NC}"
 echo
-node deposit.js "$solana_address" 0x11b8db6bb77ad8cb9af09d0867bb6b92477dd68e "$gas_limit" "$ethereum_private_key" https://1rpc.io/sepolia
+node bin/cli.js -k pvt-key.txt -d "$solana_address" -a 0.01 --sepolia
 echo
 
 
